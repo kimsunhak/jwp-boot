@@ -1,0 +1,80 @@
+//querydsl 추가
+buildscript {
+   dependencies {
+      classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.10")
+   }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.3.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
+}
+
+group = 'com.ksh'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'com.querydsl:querydsl-jpa' //querydsl 추가
+    implementation 'com.querydsl:querydsl-apt' //querydsl 추가
+
+    compileOnly 'org.projectlombok:lombok'
+
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'io.springfox:springfox-swagger2:2.6.1'
+	compile 'io.springfox:springfox-swagger-ui:2.6.1'
+    compile 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+//querydsl 추가
+def querydslDir = "$buildDir/generated/querydsl"
+querydsl {
+    library = 'com.querydsl:querydsl-apt'
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', querydslDir]
+        }
+    }
+}
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
