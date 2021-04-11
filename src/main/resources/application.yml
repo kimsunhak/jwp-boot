@@ -1,0 +1,29 @@
+spring:
+
+  # DataBase 설정
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://composite.ckrexzv2xjuz.ap-northeast-2.rds.amazonaws.com:3306
+    username: maria
+    password: maria123!
+    initialization-mode: always
+
+
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#        show_sql: true
+        format_sql: true
+
+  # 자동 빌드
+  devtools:
+    livereload:
+      enabled: true
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
