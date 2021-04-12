@@ -30,6 +30,10 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
+    @Column(name = "member_role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Column
     private String providerId;
 
@@ -39,5 +43,9 @@ public class Member extends BaseTimeEntity {
         this.password = password;
         this.provider = provider;
         this.providerId = providerId;
+    }
+
+    public String roleName() {
+        return role.name();
     }
 }
