@@ -47,3 +47,5 @@ server:
   port: 8080
 
 ~~~
+
+- UserPrincipal 설정 진행 작업 진행중
