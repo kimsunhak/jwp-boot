@@ -12,7 +12,10 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Member extends BaseTimeEntity {
+@Table(name = "member", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "member_email")
+})
+public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
@@ -37,15 +40,25 @@ public class Member extends BaseTimeEntity {
     @Column
     private String providerId;
 
-    public Member(String name, String email, String password, AuthProvider provider, String providerId) {
+    @Column
+    private String imageUrl;
+
+    public Member(String name, String email, String password, AuthProvider provider, String providerId, String imageUrl) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.provider = provider;
         this.providerId = providerId;
+        this.imageUrl = imageUrl;
     }
 
     public String roleName() {
         return role.name();
     }
+
+    public void updateExistingMember(String name, String imageUrl) {
+        this.name = name;
+        this.imageUrl = imageUrl;
+    }
 }
+
