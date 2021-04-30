@@ -1,8 +1,7 @@
 # 혼자 진행하는 SpringBoot
 
----
 
-## 환경설정
+### 환경설정
 
 ---
 
@@ -48,4 +47,18 @@ server:
 
 ~~~
 
-- UserPrincipal 설정 진행 작업 진행중
+- <span style="color:#ffff">application-jwt.yml</span>
+
+~~~ yml
+app:
+  auth:
+    token-secret: <시크릿>
+    # Access Token 만료기간 
+    access-token-expiration-msec: 7200000
+    # Refresh Token 만료기간
+    refresh-token-expiration-msec: 864000000
+
+  # OAuth2 RedirectURI  
+  o-auth2:
+    authorized-redirect-uris: http://localhost:3000/oauth2/redirect
+~~~
