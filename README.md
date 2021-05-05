@@ -47,7 +47,7 @@ server:
 
 ~~~
 
-- <span style="color:#ffff">application-jwt.yml</span>
+- <span style="color:#ffff">application-jwt.yml 설정</span>
 
 ~~~ yml
 app:
