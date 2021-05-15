@@ -5,6 +5,7 @@ import com.ksh.portfolio.domain.member.Member;
 import com.ksh.portfolio.payload.response.ApiResponse;
 import com.ksh.portfolio.payload.response.MemberInfoResponse;
 import com.ksh.portfolio.repository.member.MemberRepository;
+import com.ksh.portfolio.service.member.MemberService;
 import com.ksh.portfolio.security.CurrentUser;
 import com.ksh.portfolio.security.UserPrincipal;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberRepository memberRepository;
+    
+    private final MemberService memberService;
 
     @ApiOperation(value = "사용자 정보 반환")
     @GetMapping("/member/me")
