@@ -37,10 +37,4 @@ public class MemberController {
         return ResponseEntity.ok(new ApiResponse(true, "사용자 정보 반환", "memberInfo", memberInfoResponse));
     }
     
-    @ApiOperation(value = "사용자 조회", notes = "사용자 조회")
-    @GetMapping("member/me")
-    @PreAuthorize("hasRole('MEMBER') or hasRole('ADMIN')")
-    public Member memberInfo(@CurrentUser UserPrincipal userPrincipal) {
-        return memberRepository.findById(userPrincipal.getMemberNo()).orElseThrow(() -> new ResourceNotFoundException("Member", "id", userPrincipal.getMemberNo(), "200"));
-    }
 }
