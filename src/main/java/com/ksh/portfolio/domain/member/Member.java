@@ -60,5 +60,9 @@ public class Member {
         this.name = name;
         this.imageUrl = imageUrl;
     }
+
+    public void memberChangePassword(String password) {
+        this.password = password;
+    }
 }
 
