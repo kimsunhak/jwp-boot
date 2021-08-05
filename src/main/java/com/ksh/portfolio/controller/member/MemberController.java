@@ -16,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
@@ -38,6 +41,23 @@ public class MemberController {
         MemberInfoResponse memberInfoResponse = new MemberInfoResponse(member.getId(), member.getName(), member.getEmail(), member.getImageUrl());
 
         return ResponseEntity.ok(new ApiResponse(true, "사용자 정보 반환", "memberInfo", memberInfoResponse));
+    }
+
+
+    @ApiOperation(value = "사용자 정보 수정", notes = "사용자의 정보를 수정합니다.")
+    @PostMapping("/member/{id}")
+    @PreAuthorize("hasRole('ROLE_MEMBER')")
+    public ResponseEntity<?> updateMemberInfo(@CurrentUser UserPrincipal userPrincipal,
+                                              @RequestParam(required = false) MultipartFile imageFile,
+                                              @RequestParam String name,
+                                              @PathVariable Long id) throws IOException {
+        if (!id.equals(userPrincipal.getId())) {
+            throw new RequestParamException("jwt Token의 유저 아이디와 일치하지 않습니다. : " + id, "103");
+        }
+
+        memberService.updateMemberInfo(id, imageFile, name);
+
+        return ResponseEntity.ok(new ApiResponse(true, "사용자 정보 수정 완료"));
     }
 
     @ApiOperation(value = "기존 비밀번호 검사", notes = "axios 실시간 이벤트")

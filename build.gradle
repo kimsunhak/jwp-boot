@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.nimbusds:nimbus-jose-jwt:3.10' //Jwt 추가
     implementation 'org.apache.httpcomponents:httpclient' // HttpClient
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.6'
+    implementation 'com.amazonaws:aws-java-sdk:1.11.133' //AWS
 
     compileOnly 'org.projectlombok:lombok'
 
