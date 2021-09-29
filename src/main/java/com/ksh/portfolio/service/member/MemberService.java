@@ -60,6 +60,11 @@ public class MemberService {
         member.memberChangePassword(passwordEncoder.encode(passwordRequest.getNewPassword()));
     }
 
+    @Transactional
+    public boolean checkEmail(String email) {
+        return !memberRepository.findByEmail(email).isPresent();
+    }
+
     public String uploadImageFile(MultipartFile imageFile) throws IOException {
         String imageUrl;
         String fileName = imageFile.getOriginalFilename();

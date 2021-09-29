@@ -1,0 +1,18 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIA2LVQOAD2NGXH4DML
+      secretKey: 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
+      instanceProfile: true
+    s3:
+      bucket: ifcommunity-s3
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+api:
+  s3:
+    profile:
+      dir: profile
+      defaultImage: https://d3ztqaagptbg1.cloudfront.net/profile/userDefault.jpg?q=82&s=80x80&t=crop

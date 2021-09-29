@@ -26,7 +26,7 @@ import java.io.IOException;
 public class MemberController {
 
     private final MemberRepository memberRepository;
-    
+
     private final MemberService memberService;
 
     private final PasswordEncoder passwordEncoder;
@@ -43,6 +43,11 @@ public class MemberController {
         return ResponseEntity.ok(new ApiResponse(true, "사용자 정보 반환", "memberInfo", memberInfoResponse));
     }
 
+    @ApiOperation(value = "이메일 중복검사", notes = "이메일 중복검사를 실시합니다.")
+    @GetMapping("/member/{email}")
+    public ResponseEntity<Boolean> checkEmail(@PathVariable String email) {
+        return ResponseEntity.ok(memberService.checkEmail(email));
+    }
 
     @ApiOperation(value = "사용자 정보 수정", notes = "사용자의 정보를 수정합니다.")
     @PostMapping("/member/{id}")
@@ -84,5 +89,4 @@ public class MemberController {
 
         return ResponseEntity.ok(new ApiResponse(true, "비밀번호 변경이 완료되었습니다."));
     }
-    
 }
