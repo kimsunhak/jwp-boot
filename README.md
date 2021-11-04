@@ -62,3 +62,5 @@ app:
   o-auth2:
     authorized-redirect-uris: http://localhost:3000/oauth2/redirect
 ~~~
+
+Aws S3 Image Resize 기능 구현 추가 예정
