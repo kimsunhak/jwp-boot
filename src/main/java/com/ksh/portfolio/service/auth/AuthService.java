@@ -83,6 +83,7 @@ public class AuthService {
         } else {
             memberRefreshTokenRepository.save(new MemberRefreshToken(memberId, refreshToken.getJwtToken()));
         }
+
         return new AuthResponse(accessToken, refreshToken);
     }
 

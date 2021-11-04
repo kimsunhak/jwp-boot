@@ -57,6 +57,10 @@ public class S3Uploader {
         return amazonS3.getUrl(s3BucketName, fileName).toString();
     }
 
+    private void removeFile(String path, String name) {
+        amazonS3.deleteObject(s3BucketName, profileDir + (path != null ? File.separator + path : "") + File.separator + name);
+    }
+
     private void removeNewFile(File file) {
         if (file.delete()) {
             logger.info("파일이 삭제되었습니다.");
