@@ -1,6 +1,7 @@
 package com.ksh.jwpboot.domain.member;
 
 
+import com.ksh.jwpboot.domain.base.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "member", uniqueConstraints = {
         @UniqueConstraint(columnNames = "member_email")
 })
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")

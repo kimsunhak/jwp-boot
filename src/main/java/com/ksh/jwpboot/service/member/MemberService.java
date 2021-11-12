@@ -29,10 +29,10 @@ public class MemberService {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${api.s3.profile.dir}")
+    @Value("${app.s3.profile.dir}")
     private String profileDir;
 
-    @Value("${api.s3.profile.defaultImage}")
+    @Value("${app.s3.profile.defaultImage}")
     private String userDefaultImage;
 
 

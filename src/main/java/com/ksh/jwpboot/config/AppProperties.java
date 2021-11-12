@@ -12,6 +12,7 @@ import java.util.List;
 public class AppProperties {
     private final Auth auth = new Auth();
     private final OAuth2 oAuth2 = new OAuth2();
+    private final S3 s3 = new S3();
 
     @Getter
     @Setter
@@ -32,5 +33,13 @@ public class AppProperties {
             this.authorizedRedirectUris = authorizedRedirectUris;
             return this;
         }
+    }
+
+    @Getter
+    @Setter
+    public static final class S3 {
+        private String defaultImageUri;
+        private Integer defaultNumber;
+        private String defaultExtension;
     }
 }

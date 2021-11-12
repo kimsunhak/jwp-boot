@@ -30,7 +30,7 @@ public class S3Uploader {
     @Value("${cloud.aws.s3.bucket}")
     private String s3BucketName;
 
-    @Value("${api.s3.profile.dir}")
+    @Value("${app.s3.profile.dir}")
     private String profileDir;
 
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
