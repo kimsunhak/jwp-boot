@@ -26,7 +26,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ksh.portfolio.api"))
+                .apis(RequestHandlerSelectors.basePackage("com.ksh.jwpboot"))
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(Collections.singletonList(securityContext()))
@@ -35,7 +35,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("portfolio API")
+                .title("JWP-Boot API")
                 .description("Swagger RestAPIs")
                 .version("1.0-SNAPSHOT")
                 .build();
