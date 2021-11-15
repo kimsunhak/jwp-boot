@@ -1,6 +1,6 @@
 //querydsl 추가
 plugins {
-    id 'org.springframework.boot' version '2.3.9.RELEASE'
+    id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
@@ -19,6 +19,11 @@ configurations {
 repositories {
     mavenCentral()
 }
+
+ext {
+    set('springCloudVersion', "2020.0.4")
+}
+
 
 dependencies {
     implementation 'junit:junit:4.13.2'
@@ -41,13 +46,18 @@ dependencies {
     implementation 'com.amazonaws:aws-java-sdk:1.11.133' //AWS
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
 
+    implementation 'org.springframework.cloud:spring-cloud-starter'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+
     compileOnly 'org.projectlombok:lombok'
 
     compile 'org.springframework.boot:spring-boot-starter'
-    compile 'io.springfox:springfox-swagger2:2.6.1'
-	compile 'io.springfox:springfox-swagger-ui:2.6.1'
+    compile 'io.springfox:springfox-swagger2:2.9.2'
+	compile 'io.springfox:springfox-swagger-ui:2.9.2'
     compile 'org.springframework.boot:spring-boot-starter-oauth2-client'
     compile 'org.springframework.boot:spring-boot-starter-actuator'
+
 
 //    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
@@ -55,6 +65,12 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'org.springframework.security:spring-security-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 test {

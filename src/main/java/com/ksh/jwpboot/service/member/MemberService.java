@@ -1,7 +1,10 @@
 package com.ksh.jwpboot.service.member;
 
 
+import com.ksh.jwpboot.domain.member.AuthProvider;
 import com.ksh.jwpboot.domain.member.Member;
+import com.ksh.jwpboot.domain.member.Role;
+import com.ksh.jwpboot.exception.BadRequestException;
 import com.ksh.jwpboot.exception.NotSupportedException;
 import com.ksh.jwpboot.exception.ResourceNotFoundException;
 import com.ksh.jwpboot.payload.request.PasswordRequest;
@@ -35,6 +38,31 @@ public class MemberService {
     @Value("${app.s3.profile.defaultImage}")
     private String userDefaultImage;
 
+    @Transactional
+    public void memberJoin(String email, String name, String password, MultipartFile multipartFile) throws IOException {
+        if (memberRepository.findByEmail(email).isPresent()) {
+            throw new BadRequestException("이미 존재하는 이메일입니다.");
+        }
+
+        String imageUrI;
+
+        if (multipartFile != null) {
+            imageUrI = s3Uploader.uploadImageFile(multipartFile);
+        } else {
+            imageUrI = userDefaultImage;
+        }
+
+        Member member = Member.builder()
+                .email(email)
+                .name(name)
+                .password(passwordEncoder.encode(password))
+                .imageUrl(imageUrI)
+                .provider(AuthProvider.local)
+                .providerId("local")
+                .role(Role.ROLE_MEMBER)
+                .build();
+        memberRepository.save(member);
+    }
 
     @Transactional
     public void updateMemberInfo(Long id, MultipartFile imageFile, String name) throws IOException {

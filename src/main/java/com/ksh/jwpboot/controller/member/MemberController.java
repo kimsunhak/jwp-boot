@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 
 @RestController
@@ -88,5 +90,17 @@ public class MemberController {
         }
 
         return ResponseEntity.ok(new ApiResponse(true, "비밀번호 변경이 완료되었습니다."));
+    }
+
+    @ApiOperation(value = "회원가입", notes = "사용자를 추가합니다.")
+    @PutMapping("/member/join")
+    public ResponseEntity<?> join(@RequestParam @Email String email,
+                                  @RequestParam @NotBlank String name,
+                                  @RequestParam String password,
+                                  @RequestParam (required = false) MultipartFile imageFile) throws IOException {
+
+        memberService.memberJoin(email, name, password, imageFile);
+
+        return ResponseEntity.ok(new ApiResponse(true, "회원가입이 완료되었습니다."));
     }
 }

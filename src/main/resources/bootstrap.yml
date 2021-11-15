@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: jwp-boot
+  profiles:
+    active: local
+  config:
+    import: optional:configserver:http://localhost:8888
+
+
+encrypt:
+  key: ksh-cloud-config-server
+
