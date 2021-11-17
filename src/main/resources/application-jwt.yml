@@ -3,5 +3,5 @@ app:
     token-secret: 478SXNCMXZOASID1723910DASJDASKL
     access-token-expiration-msec: 7200000
     refresh-token-expiration-msec: 864000000
-  o-auth2:
+  oauth2:
     authorized-redirect-uris: http://localhost:8080/oauth2/redirect

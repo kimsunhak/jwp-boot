@@ -15,7 +15,7 @@ public class ApiResponse {
     private boolean success;
     private String errorCode;
     private String message;
-    private Map<String, Object> data = new HashMap<>();
+    private final Map<String, Object> data = new HashMap<>();
 
     public ApiResponse(boolean success, String message) {
         this.dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

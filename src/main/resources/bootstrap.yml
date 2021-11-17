@@ -4,9 +4,6 @@ spring:
   profiles:
     active: local
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://{configServerUrl}:3254
 
-
-encrypt:
-  key: ksh-cloud-config-server
 
