@@ -36,7 +36,7 @@ public class MemberController {
     @ApiOperation(value = "사용자 정보 반환")
     @GetMapping("/member/me")
     @PreAuthorize("hasRole('ROLE_MEMBER')")
-    public ResponseEntity<?> memberInfo(@CurrentUser UserPrincipal userPrincipal) {
+    public ResponseEntity<ApiResponse> memberInfo(@CurrentUser UserPrincipal userPrincipal) {
 
         Member member = userPrincipal.getMember();
 

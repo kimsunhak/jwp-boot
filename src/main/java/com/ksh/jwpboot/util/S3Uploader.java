@@ -1,7 +1,9 @@
 package com.ksh.jwpboot.util;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.ksh.jwpboot.exception.NotSupportedException;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +60,14 @@ public class S3Uploader {
     }
 
     private void removeFile(String path, String name) {
-        amazonS3.deleteObject(s3BucketName, profileDir + (path != null ? File.separator + path : "") + File.separator + name);
+        try {
+            DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(s3BucketName, path + name);
+            amazonS3.deleteObject(deleteObjectRequest);
+            logger.info("파일 삭제 성공");
+        } catch (AmazonServiceException e) {
+            logger.info("파일 삭제 실패");
+            logger.debug(String.valueOf(e));
+        }
     }
 
     private void removeNewFile(File file) {
