@@ -63,4 +63,16 @@ app:
     authorized-redirect-uris: http://localhost:3000/oauth2/redirect
 ~~~
 
-Aws S3 Config 
+#### bootstrap.yml
+
+~~~ yml
+# Srping Cloud Config Server 연결
+spring:
+  application:
+    name: jwp-boot
+  profiles:
+    active: local
+  config:
+    import: optional:configserver:http://{configServerUrl}:3254
+
+~~~
