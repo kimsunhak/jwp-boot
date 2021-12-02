@@ -24,5 +24,6 @@ public class LoggingAspect {
             log.info("{} : {}", joinPoint.getSignature().getName(), timeMs / 1000.0 + " MS");
         }
     }
+
 }
 

@@ -5,5 +5,3 @@ spring:
     active: local
   config:
     import: optional:configserver:http://{configServerUrl}:3254
-
-

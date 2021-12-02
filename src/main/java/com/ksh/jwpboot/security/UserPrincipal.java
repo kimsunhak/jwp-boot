@@ -93,7 +93,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     */
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return false;
     }
 
     @Override

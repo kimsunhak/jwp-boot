@@ -74,6 +74,7 @@ public class AuthController {
         return ResponseEntity.ok(new ApiResponse(true, "유효한 토큰 입니다."));
     }
 
+
     @ApiOperation(value = "RefreshToken 유효성 검사", notes = "RefreshToken의 유효성을 검사하고 결과를 반환합니다.")
     @PostMapping("auth/validation/refresh/token")
     public ResponseEntity<?> validateRefreshJwtToken(@Valid @RequestBody JwtRequest jwtRequest, BindingResult bindingResult) {

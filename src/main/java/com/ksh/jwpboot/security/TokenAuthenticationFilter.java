@@ -74,7 +74,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         ApiResponse apiResponse = new ApiResponse(false, errorCode, message);
         String responseString = objectMapper.writeValueAsString(apiResponse);
         response.setContentType("application/json;charset=UTF-8");
-        logger.info("responseString : " + responseString);
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.getWriter().write(responseString);
     }
