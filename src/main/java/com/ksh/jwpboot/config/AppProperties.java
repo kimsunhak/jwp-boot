@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@EnableConfigurationProperties(AppProperties.class)
+//@EnableConfigurationProperties(AppProperties.class)
+@ConfigurationProperties(prefix = "app")
 public class AppProperties {
     private final Auth auth = new Auth();
     private final OAuth2 oAuth2 = new OAuth2();
